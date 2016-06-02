@@ -27,7 +27,7 @@ describe('stateToMarkdown', () => {
     let {description, state, markdown} = testCase;
     it(`should render ${description}`, () => {
       let contentState = ContentState.createFromBlockArray(
-        convertFromRaw(state)
+        convertFromRaw(state).getBlocksAsArray()
       );
       expect(stateToMarkdown(contentState)).toBe(markdown + '\n');
     });
