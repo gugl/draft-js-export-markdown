@@ -9,6 +9,7 @@ import {
 import {Entity} from 'draft-js';
 
 import type {ContentState, ContentBlock} from 'draft-js';
+import {Map} from 'immutable';
 
 const {
   BOLD,
@@ -225,6 +226,10 @@ class MarkupGenerator {
         let url = data.url || '';
         let title = data.title ? ` "${escapeTitle(data.title)}"` : '';
         return `[${content}](${encodeURL(url)}${title})`;
+      } else if (entity != null && entity.getType() === 'mention') {
+        let data = Map(entity.getData().mention).toJS();
+        let id = data.id || '';
+        return `@[${content}](${id})`;
       } else if (entity != null && entity.getType() === ENTITY_TYPE.IMAGE) {
         let data = entity.getData();
         let src = data.src || '';
