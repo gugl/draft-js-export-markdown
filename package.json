@@ -2,9 +2,9 @@
   "name": "draft-js-export-markdown",
   "version": "0.2.0",
   "description": "DraftJS: Export ContentState to Markdown",
-  "main": "lib/main.js",
+  "main": "dist/main.js",
   "scripts": {
-    "build": "babel src --ignore '_*' --out-dir lib",
+    "build": "babel src --ignore '_*' --out-dir dist",
     "lint": "eslint --max-warnings 0 .",
     "typecheck": "flow",
     "prepublish": "npm run build",
