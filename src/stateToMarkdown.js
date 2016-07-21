@@ -224,8 +224,7 @@ class MarkupGenerator {
       if (entity != null && entity.getType() === ENTITY_TYPE.LINK) {
         let data = entity.getData();
         let url = data.url || '';
-        let title = data.title ? ` "${escapeTitle(data.title)}"` : '';
-        return `[${content}](${encodeURL(url)}${title})`;
+        return `[${text}](${url})`;
       } else if (entity != null && entity.getType() === 'mention') {
         let data = Map(entity.getData().mention).toJS();
         let id = data.id || '';
@@ -236,6 +235,9 @@ class MarkupGenerator {
         let alt = data.alt ? ` "${escapeTitle(data.alt)}"` : '';
         return `![${alt}](${encodeURL(src)})`;
       } else {
+        if (text.indexOf('http://') > -1 || text.indexOf('https://') > -1) {
+          return text;
+        }
         return content;
       }
     }).join('');
