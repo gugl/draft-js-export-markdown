@@ -233,7 +233,7 @@ var MarkupGenerator = function () {
         if (entity != null && entity.getType() === _draftJsUtils.ENTITY_TYPE.LINK) {
           var data = entity.getData();
           var url = data.url || '';
-          return '[' + text + '](' + url + ')';
+          return '[' + content + '](' + url + ')';
         } else if (entity != null && entity.getType() === 'mention') {
           var _data = (0, _immutable.Map)(entity.getData().mention).toJS();
           var id = _data.id || '';
@@ -244,9 +244,6 @@ var MarkupGenerator = function () {
           var alt = _data2.alt ? ' "' + escapeTitle(_data2.alt) + '"' : '';
           return '![' + alt + '](' + encodeURL(src) + ')';
         } else {
-          if (text.indexOf('http://') > -1 || text.indexOf('https://') > -1) {
-            return text;
-          }
           return content;
         }
       }).join('');
@@ -267,6 +264,9 @@ function canHaveDepth(blockType) {
 }
 
 function encodeContent(text) {
+  if (text.indexOf('http://') > -1 || text.indexOf('https://') > -1) {
+    return text;
+  }
   return text.replace(/[*_`]/g, '\\$&');
 }
 

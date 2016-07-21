@@ -224,7 +224,7 @@ class MarkupGenerator {
       if (entity != null && entity.getType() === ENTITY_TYPE.LINK) {
         let data = entity.getData();
         let url = data.url || '';
-        return `[${text}](${url})`;
+        return `[${content}](${url})`;
       } else if (entity != null && entity.getType() === 'mention') {
         let data = Map(entity.getData().mention).toJS();
         let id = data.id || '';
@@ -235,9 +235,6 @@ class MarkupGenerator {
         let alt = data.alt ? ` "${escapeTitle(data.alt)}"` : '';
         return `![${alt}](${encodeURL(src)})`;
       } else {
-        if (text.indexOf('http://') > -1 || text.indexOf('https://') > -1) {
-          return text;
-        }
         return content;
       }
     }).join('');
@@ -255,6 +252,9 @@ function canHaveDepth(blockType: any): boolean {
 }
 
 function encodeContent(text) {
+  if (text.indexOf('http://') > -1 || text.indexOf('https://') > -1) {
+    return text;
+  }
   return text.replace(/[*_`]/g, '\\$&');
 }
 
