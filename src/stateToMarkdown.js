@@ -206,7 +206,7 @@ class MarkupGenerator {
         }
         if (style.has(UNDERLINE)) {
           // TODO: encode `+`?
-          content = `++${content}++`;
+          content = `__${content}__`;
         }
         if (style.has(ITALIC)) {
           content = `_${content}_`;
