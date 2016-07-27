@@ -255,7 +255,7 @@ function encodeContent(text) {
   if (text.indexOf('http://') > -1 || text.indexOf('https://') > -1) {
     return text;
   }
-  return text.replace(/[*_`]/g, '\\$&');
+  return text.replace(/[*_`-]/g, '\\$&');
 }
 
 // Encode chars that would normally be allowed in a URL but would conflict with
